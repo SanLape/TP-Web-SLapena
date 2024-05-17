@@ -50,12 +50,13 @@
                     </div>
                 </div>
             </nav>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            <div class="container">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
             <footer>
                 <hr />
-                <h1>
-                    FOTER
+                <h1>FOTER
                 </h1>
             </footer>
         </div>
