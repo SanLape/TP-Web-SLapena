@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
@@ -12,6 +13,7 @@ namespace Vista
     public partial class Default : System.Web.UI.Page
     {
         public List<articulo> ListaArticulos { get; set; }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             articuloNegocio negocio = new articuloNegocio();
@@ -23,9 +25,8 @@ namespace Vista
             }
             else
             {
-                cargar();
-            }
 
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -41,6 +42,31 @@ namespace Vista
         {
             repRepetidor.DataSource = ListaArticulos;
             repRepetidor.DataBind();
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            int idArt = int.Parse(((Button)sender).CommandArgument);
+            articuloNegocio negocio = new articuloNegocio();
+
+            if (Session["listaCarrito"] == null)
+            {
+                Session.Add("listaCarrito",negocio.listar(idArt));
+            }
+            else
+            {
+                Session.Add("listaCarrito", negocio.listar(idArt));
+            }
+        }
+        
+        protected void btnQuitar_Click(object sender, EventArgs e)
+        {
+            if (Session.Count > 0)
+            {
+                string idArt = ((Button)sender).CommandArgument;
+                Session.Remove(idArt);
+
+            }
         }
     }
 }

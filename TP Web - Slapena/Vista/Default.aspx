@@ -4,14 +4,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <hr /> 
-    <div class="row">    
-            <div class="col-10">
-                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2">NOMBRE DE PORDUCTO</asp:TextBox>
-            </div>
-            <div class="col-2">
-                <asp:Button ID="btnBuscar" runat="server" Text="BUSCAR" OnClick="btnBuscar_Click" CssClass="btn btn-success" />
-            </div>       
+    <hr />
+    <div class="row">
+        <div class="col-10">
+            <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2">NOMBRE DE PORDUCTO</asp:TextBox>
+        </div>
+        <div class="col-2">
+            <asp:Button ID="btnBuscar" runat="server" Text="BUSCAR" OnClick="btnBuscar_Click" CssClass="btn btn-success" />
+        </div>
     </div>
 
     <hr />
@@ -26,7 +26,16 @@
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("nombre") %></h5>
                             <p class="card-text"><%#Eval("descripcion") %></p>
-                            <a href="DetalleArticulo.aspx?id=<%#Eval("idArticulo") %>" class="btn btn-primary">DETALLE</a>
+                            
+                            
+                            <div class="btn-group" role="group">
+                                
+                                <a href="DetalleArticulo.aspx?id=<%#Eval("idArticulo") %>" class="btn btn-outline-success">DETALLE</a>   
+                                <asp:Button ID="btnAgregar" runat="server" Text="+" CssClass="btn btn-success" CommandArgument='<%#Eval("idArticulo") %>' CommandName="artID" OnClick="btnAgregar_Click"/>
+                                <asp:Button ID="btnQuitar" runat="server" Text="-" CssClass="btn btn-danger" CommandArgument='<%#Eval("idArticulo") %>' CommandName="artID" OnClick="btnQuitar_Click"/>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
