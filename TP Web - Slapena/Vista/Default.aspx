@@ -4,8 +4,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <hr /> 
+    <div class="row">    
+            <div class="col-10">
+                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2">NOMBRE DE PORDUCTO</asp:TextBox>
+            </div>
+            <div class="col-2">
+                <asp:Button ID="btnBuscar" runat="server" Text="BUSCAR" OnClick="btnBuscar_Click" CssClass="btn btn-success" />
+            </div>       
+    </div>
+
+    <hr />
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
- 
+
         <asp:Repeater ID="repRepetidor" runat="server">
             <ItemTemplate>
                 <div class="col">

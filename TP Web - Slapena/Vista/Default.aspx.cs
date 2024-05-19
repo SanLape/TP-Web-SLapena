@@ -17,11 +17,28 @@ namespace Vista
             articuloNegocio negocio = new articuloNegocio();
             ListaArticulos = negocio.listar();
 
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
-
+                cargar();
+            }
+            else
+            {
+                cargar();
             }
 
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+            string nombreBuscar = txtBuscar.Text;
+
+            ListaArticulos = ListaArticulos.FindAll(x => x.nombre.ToUpper().Contains(nombreBuscar.ToUpper()));
+            cargar();
+
+        }
+        private void cargar()
+        {
             repRepetidor.DataSource = ListaArticulos;
             repRepetidor.DataBind();
         }
