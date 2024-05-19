@@ -17,6 +17,11 @@ namespace Vista
             articuloNegocio negocio = new articuloNegocio();
             ListaArticulos = negocio.listar();
 
+            if(!IsPostBack)
+            {
+
+            }
+
             repRepetidor.DataSource = ListaArticulos;
             repRepetidor.DataBind();
         }

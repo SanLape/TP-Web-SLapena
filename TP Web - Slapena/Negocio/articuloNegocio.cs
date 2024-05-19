@@ -63,6 +63,58 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public List<articulo> listar(int idArticulo)
+        {
+            string select = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Id marcID, M.Descripcion marcDesc, C.Id catID, C.Descripcion catDesc, Precio, I.Id imgID, I.ImagenUrl imgUrl";
+            string from = " FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id LEFT JOIN IMAGENES AS I ON I.IdArticulo = A.Id";
+            string where = " WHERE A.Id = @idArticulo";
+
+            try
+            {
+                datos.setConsulta(select + from + where);
+                datos.setearParametro("@idArticulo", idArticulo);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    articulo aux = new articulo();
+                    aux.idArticulo = (int)datos.Lector["Id"];
+                    aux.codigo = (string)datos.Lector["Codigo"];
+                    aux.nombre = (string)datos.Lector["Nombre"];
+                    aux.descripcion = (string)datos.Lector["Descripcion"];
+                    aux.precio = (decimal)datos.Lector["Precio"];
+
+                    aux.marca = new marca();
+                    aux.marca.idMarca = (int)datos.Lector["marcID"];
+                    aux.marca.nombre = (string)datos.Lector["marcDesc"];
+
+                    aux.categoria = new categoria();
+                    aux.categoria.idCategoria = (int)datos.Lector["catID"];
+                    aux.categoria.nombre = (string)datos.Lector["catDesc"];
+
+                    aux.imagen = new imagen();
+                    if (!(datos.Lector["imgID"] is DBNull))
+                    {
+                        aux.imagen.idImagen = (int)datos.Lector["imgID"];
+                        aux.imagen.urlImagen = (string)datos.Lector["imgUrl"];
+                    }
+
+                    lista.Add(aux);
+
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
         public void agregar(articulo nuevo)
         {
