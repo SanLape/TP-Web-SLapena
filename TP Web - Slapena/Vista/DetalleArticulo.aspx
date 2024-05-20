@@ -17,7 +17,6 @@
             <h5 class="card-text"><%= art.marca.nombre%></h5>
             <h5 class="card-text"><%= art.categoria.nombre%></h5>
 
-            <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
     </div>
 
